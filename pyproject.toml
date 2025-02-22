@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "qt-dlp"
+dynamic = ["version"]
+description = 'qt-dlp is a graphical user interface aapplication for yt-dlp.'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "naru-jpn", email = "tus.naru@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "PySide6>=6.6.0",
+  "yt-dlp>=2023.12.30",
+]
+
+[project.urls]
+Documentation = "https://github.com/naru-jpn/qt-dlp#readme"
+Issues = "https://github.com/naru-jpn/qt-dlp/issues"
+Source = "https://github.com/naru-jpn/qt-dlp"
+
+[tool.hatch.version]
+path = "src/qt_dlp/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/qt_dlp tests}"
+
+[tool.coverage.run]
+source_pkgs = ["qt_dlp", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/qt_dlp/__about__.py",
+]
+
+[tool.coverage.paths]
+qt_dlp = ["src/qt_dlp", "*/qt-dlp/src/qt_dlp"]
+tests = ["tests", "*/qt-dlp/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
